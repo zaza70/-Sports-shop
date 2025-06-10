@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنتجات - أحذية أنيقة 2025</title>
+    <meta name="description" content="تصفح مجموعتنا الواسعة من الأحذية العصرية والأنيقة بأسعار تنافسية">
+    <meta name="theme-color" content="#d35400">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .filters {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-option {
+            padding: 8px 15px;
+            background-color: #f1f1f1;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-option:hover, .filter-option.active {
+            background-color: #d35400;
+            color: #fff;
+        }
+
+        .products-container {
+            display: flex;
+            gap: 30px;
+        }
+
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+
+        .products-content {
+            flex-grow: 1;
+        }
+
+        @media (max-width: 768px) {
+            .products-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">أحذية <span>أنيقة</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html">المنتجات</a></li>
+                    <li><a href="index.html#about">من نحن</a></li>
+                    <li><a href="index.html#contact">اتصل بنا</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="favorites.html" class="favorites-icon">
+                            <i class="fas fa-heart"></i>
+                            <span class="favorites-count">0</span>
+                        </a>
+                    </li>
+                    <li class="search-container">
+                        <form action="search-results.html" method="get" class="search-form">
+                            <input type="text" name="query" placeholder="ابحث عن منتج..." class="search-input">
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Products Section -->
+    <section class="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>جميع المنتجات</h2>
+                <p>اكتشف مجموعتنا الواسعة من الأحذية العصرية والأنيقة</p>
+            </div>
+
+            <div class="products-container">
+                <div class="sidebar">
+                    <div class="filters">
+                        <div class="filter-group" data-filter-type="type">
+                            <h3>النوع</h3>
+                            <div class="filter-options">
+                                <div class="filter-option active" data-value="all">الكل</div>
+                                <div class="filter-option" data-value="sport">رياضي</div>
+                                <div class="filter-option" data-value="formal">رسمي</div>
+                                <div class="filter-option" data-value="casual">كاجوال</div>
+                            </div>
+                        </div>
+
+                        <div class="filter-group" data-filter-type="price">
+                            <h3>السعر</h3>
+                            <div class="filter-options">
+                                <div class="filter-option active" data-value="all">الكل</div>
+                                <div class="filter-option" data-value="low">أقل من 500 درهم</div>
+                                <div class="filter-option" data-value="medium">500 - 1000 درهم</div>
+                                <div class="filter-option" data-value="high">أكثر من 1000 درهم</div>
+                            </div>
+                        </div>
+
+                        <div class="filter-group" data-filter-type="size">
+                            <h3>المقاس</h3>
+                            <div class="filter-options">
+                                <div class="filter-option" data-value="39">39</div>
+                                <div class="filter-option" data-value="40">40</div>
+                                <div class="filter-option" data-value="41">41</div>
+                                <div class="filter-option" data-value="42">42</div>
+                                <div class="filter-option" data-value="43">43</div>
+                                <div class="filter-option" data-value="44">44</div>
+                                <div class="filter-option" data-value="45">45</div>
+                            </div>
+                        </div>
+
+                        <div class="filter-group" data-filter-type="color">
+                            <h3>اللون</h3>
+                            <div class="filter-options">
+                                <div class="filter-option" data-value="black">أسود</div>
+                                <div class="filter-option" data-value="brown">بني</div>
+                                <div class="filter-option" data-value="white">أبيض</div>
+                                <div class="filter-option" data-value="blue">أزرق</div>
+                                <div class="filter-option" data-value="red">أحمر</div>
+                            </div>
+                        </div>
+
+                        <div class="filter-summary">
+                            <p>عدد المنتجات: <span id="products-count">8</span></p>
+                            <button class="btn reset-filters">إعادة ضبط الفلاتر</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="products-content">
+                    <div id="all-products"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>أحذية أنيقة</h3>
+                    <p style="color: #ddd; margin-bottom: 20px;">
+                        متجرك المفضل للأحذية العصرية والأنيقة بأسعار تنافسية
+                    </p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="products.html">المنتجات</a></li>
+                        <li><a href="index.html#about">من نحن</a></li>
+                        <li><a href="index.html#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>خدمة العملاء</h3>
+                    <ul>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الإرجاع</a></li>
+                        <li><a href="terms.html">الشروط والأحكام</a></li>
+                        <li><a href="privacy-policy.html">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="margin-left: 10px;"></i> شارع محمد الخامس، الدار البيضاء، المغرب</li>
+                        <li><i class="fas fa-phone" style="margin-left: 10px;"></i> +212 522 123 456</li>
+                        <li><i class="fas fa-envelope" style="margin-left: 10px;"></i> info@moroccanshoes.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 أحذية أنيقة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Compare Bar -->
+    <div id="compare-bar" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background-color: #333; color: #fff; padding: 15px; z-index: 100; justify-content: space-between; align-items: center;">
+        <div>
+            <span>المنتجات المحددة للمقارنة: <span class="compare-count">0</span></span>
+        </div>
+        <div>
+            <a href="compare.html" class="btn" style="background-color: #d35400; margin-left: 10px;">مقارنة المنتجات</a>
+            <button class="btn" style="background-color: #666;" id="clear-compare">إلغاء المقارنة</button>
+        </div>
+    </div>
+
+    <script src="js/image-optimizer.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterOptions = document.querySelectorAll('.filter-option');
+            let activeFilters = {
+                type: 'all',
+                price: 'all',
+                size: null,
+                color: null
+            };
+
+            // Apply filters function
+            function applyFilters() {
+                const allProducts = document.querySelectorAll('.product-card');
+
+                allProducts.forEach(product => {
+                    let shouldShow = true;
+                    const productData = {
+                        id: parseInt(product.dataset.id),
+                        type: product.dataset.type,
+                        price: parseInt(product.dataset.price),
+                        sizes: product.dataset.sizes.split(',').map(size => parseInt(size)),
+                        color: product.dataset.color
+                    };
+
+                    // Filter by type
+                    if (activeFilters.type !== 'all' && productData.type !== activeFilters.type) {
+                        shouldShow = false;
+                    }
+
+                    // Filter by price
+                    if (activeFilters.price !== 'all') {
+                        if (activeFilters.price === 'low' && productData.price >= 500) {
+                            shouldShow = false;
+                        } else if (activeFilters.price === 'medium' && (productData.price < 500 || productData.price > 1000)) {
+                            shouldShow = false;
+                        } else if (activeFilters.price === 'high' && productData.price <= 1000) {
+                            shouldShow = false;
+                        }
+                    }
+
+                    // Filter by size
+                    if (activeFilters.size && !productData.sizes.includes(parseInt(activeFilters.size))) {
+                        shouldShow = false;
+                    }
+
+                    // Filter by color
+                    if (activeFilters.color && productData.color !== activeFilters.color) {
+                        shouldShow = false;
+                    }
+
+                    // Show or hide product
+                    product.style.display = shouldShow ? 'block' : 'none';
+                });
+
+                // Update count
+                const visibleProducts = document.querySelectorAll('.product-card[style="display: block;"]');
+                const countElement = document.getElementById('products-count');
+                if (countElement) {
+                    countElement.textContent = visibleProducts.length;
+                }
+            }
+
+            // Add data attributes to products
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                const productId = parseInt(card.querySelector('a').href.split('id=')[1]);
+                const product = products.find(p => p.id === productId);
+
+                if (product) {
+                    // Determine product type based on name or description
+                    let type = 'casual';
+                    if (product.name.includes('رياضي') || product.description.includes('رياضي')) {
+                        type = 'sport';
+                    } else if (product.name.includes('رسمي') || product.description.includes('رسمي')) {
+                        type = 'formal';
+                    }
+
+                    // Determine color (this would be better if color was in the product data)
+                    let color = 'black';
+                    if (product.name.includes('أسود')) {
+                        color = 'black';
+                    } else if (product.name.includes('بني')) {
+                        color = 'brown';
+                    } else if (product.name.includes('أبيض')) {
+                        color = 'white';
+                    }
+
+                    card.dataset.id = product.id;
+                    card.dataset.type = type;
+                    card.dataset.price = product.price;
+                    card.dataset.sizes = product.sizes.join(',');
+                    card.dataset.color = color;
+                }
+            });
+
+            // Add event listeners to filter options
+            filterOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const parent = this.parentElement;
+                    const filterType = parent.dataset.filterType;
+                    const filterValue = this.dataset.value;
+
+                    // Update active class
+                    const siblings = parent.querySelectorAll('.filter-option');
+                    siblings.forEach(sib => sib.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Update active filters
+                    activeFilters[filterType] = filterValue;
+
+                    // Apply filters
+                    applyFilters();
+                });
+            });
+
+            // Add compare functionality
+            const compareButtons = document.querySelectorAll('.compare-btn');
+            let compareList = JSON.parse(localStorage.getItem('compareList')) || [];
+
+            // Update compare buttons state
+            function updateCompareButtons() {
+                compareButtons.forEach(btn => {
+                    const productId = parseInt(btn.dataset.id);
+                    if (compareList.includes(productId)) {
+                        btn.classList.add('active');
+                        btn.innerHTML = '<i class="fas fa-check"></i> تمت الإضافة للمقارنة';
+                    } else {
+                        btn.classList.remove('active');
+                        btn.innerHTML = '<i class="fas fa-exchange-alt"></i> إضافة للمقارنة';
+                    }
+                });
+
+                // Update compare count
+                const compareCount = document.querySelector('.compare-count');
+                if (compareCount) {
+                    compareCount.textContent = compareList.length;
+                }
+
+                // Show/hide compare bar
+                const compareBar = document.getElementById('compare-bar');
+                if (compareBar) {
+                    compareBar.style.display = compareList.length > 0 ? 'flex' : 'none';
+                }
+            }
+
+            // Add event listeners to compare buttons
+            compareButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const productId = parseInt(this.dataset.id);
+
+                    if (compareList.includes(productId)) {
+                        // Remove from compare list
+                        compareList = compareList.filter(id => id !== productId);
+                    } else {
+                        // Add to compare list (max 4 items)
+                        if (compareList.length < 4) {
+                            compareList.push(productId);
+                        } else {
+                            alert('يمكنك مقارنة 4 منتجات كحد أقصى');
+                            return;
+                        }
+                    }
+
+                    // Save to localStorage
+                    localStorage.setItem('compareList', JSON.stringify(compareList));
+
+                    // Update buttons
+                    updateCompareButtons();
+                });
+            });
+
+            // Initialize compare buttons
+            updateCompareButtons();
+        });
+    </script>
+</body>
+</html>

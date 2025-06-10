@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلباتي - أحذية أنيقة 2025</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+        .orders-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .orders-title {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .orders-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-btn {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .order-card {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .order-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-id {
+            font-weight: bold;
+        }
+        
+        .order-date {
+            color: #666;
+        }
+        
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background-color: #ffeaa7;
+            color: #d35400;
+        }
+        
+        .status-processing {
+            background-color: #81ecec;
+            color: #00b894;
+        }
+        
+        .status-shipped {
+            background-color: #74b9ff;
+            color: #0984e3;
+        }
+        
+        .status-delivered {
+            background-color: #55efc4;
+            color: #00b894;
+        }
+        
+        .status-cancelled {
+            background-color: #fab1a0;
+            color: #d63031;
+        }
+        
+        .order-products {
+            margin-bottom: 15px;
+        }
+        
+        .order-product {
+            display: flex;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .order-product-img {
+            width: 60px;
+            height: 60px;
+            margin-left: 15px;
+        }
+        
+        .order-product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .order-product-info {
+            flex: 1;
+        }
+        
+        .order-product-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .order-product-details {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .order-total {
+            text-align: left;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .order-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .track-order-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .track-order-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .reorder-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .reorder-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        .no-orders {
+            text-align: center;
+            padding: 50px 0;
+            color: #777;
+        }
+        
+        .no-orders i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+        
+        .order-details-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 800px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .order-timeline {
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 15px;
+            width: 2px;
+            background-color: #ddd;
+        }
+        
+        .timeline-step {
+            display: flex;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .timeline-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            z-index: 1;
+        }
+        
+        .timeline-icon.active {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .timeline-content {
+            flex: 1;
+        }
+        
+        .timeline-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-date {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">أحذية <span>أنيقة</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html">المنتجات</a></li>
+                    <li><a href="index.html#about">من نحن</a></li>
+                    <li><a href="index.html#contact">اتصل بنا</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="favorites.html" class="favorites-icon">
+                            <i class="far fa-heart"></i>
+                            <span class="favorites-count">0</span>
+                        </a>
+                    </li>
+                    <li class="user-menu">
+                        <a href="#" id="user-menu-toggle">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <div class="user-dropdown">
+                            <a href="profile.html">الملف الشخصي</a>
+                            <a href="orders.html">طلباتي</a>
+                            <a href="#" id="logout-btn">تسجيل الخروج</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Orders Section -->
+    <section class="orders-section">
+        <div class="container">
+            <div class="orders-container">
+                <div class="orders-title">
+                    <h2>طلباتي</h2>
+                </div>
+                
+                <div class="orders-filter">
+                    <button class="filter-btn active" data-filter="all">جميع الطلبات</button>
+                    <button class="filter-btn" data-filter="pending">قيد الانتظار</button>
+                    <button class="filter-btn" data-filter="processing">قيد المعالجة</button>
+                    <button class="filter-btn" data-filter="shipped">تم الشحن</button>
+                    <button class="filter-btn" data-filter="delivered">تم التسليم</button>
+                    <button class="filter-btn" data-filter="cancelled">ملغي</button>
+                </div>
+                
+                <div id="orders-list">
+                    <!-- Will be filled by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Order Details Modal -->
+    <div class="order-details-modal" id="order-details-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h2>تفاصيل الطلب #<span id="modal-order-id"></span></h2>
+            
+            <div class="order-timeline">
+                <div class="timeline-line"></div>
+                <div class="timeline-step">
+                    <div class="timeline-icon active">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">تم استلام الطلب</div>
+                        <div class="timeline-date" id="timeline-order-date"></div>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-icon" id="timeline-processing-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">قيد المعالجة</div>
+                        <div class="timeline-date" id="timeline-processing-date"></div>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-icon" id="timeline-shipped-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">تم الشحن</div>
+                        <div class="timeline-date" id="timeline-shipped-date"></div>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-icon" id="timeline-delivered-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">تم التسليم</div>
+                        <div class="timeline-date" id="timeline-delivered-date"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="modal-order-details">
+                <!-- Will be filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>أحذية أنيقة</h2>
+                    <p>أفضل متجر للأحذية العصرية والأنيقة</p>
+                </div>
+                <div class="footer-links">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="products.html">المنتجات</a></li>
+                        <li><a href="index.html#about">من نحن</a></li>
+                        <li><a href="index.html#contact">اتصل بنا</a></li>
+                        <li><a href="privacy-policy.html">سياسة الخصوصية</a></li>
+                        <li><a href="terms.html">الشروط والأحكام</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>اتصل بنا</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> شارع الحسن الثاني، الرباط، المغرب</p>
+                    <p><i class="fas fa-phone"></i> +212-5XX-XXXXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@elegantshoes.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>تابعنا</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 أحذية أنيقة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/orders.js"></script>
+</body>
+</html>
